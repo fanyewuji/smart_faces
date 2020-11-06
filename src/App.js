@@ -70,7 +70,6 @@ const initialState = {
   user: {
     id: '',
     name: '',
-    email: '',
     entries: '',
     joined: ''
   }
@@ -86,7 +85,6 @@ class App extends Component {
     this.setState({user: {
       id: data.id,
       name: data.fullname,
-      email: data.email,
       entries: data.entries,
       joined: data.joined
     }})
