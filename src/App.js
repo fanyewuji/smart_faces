@@ -91,9 +91,13 @@ class App extends Component {
   }
 
   calculateBoxes = (data) => {
-    const boxes_ratio = data.map((region)=>{
-      return region['region_info']['bounding_box']
-    })
+    // console.log(data)
+    const human_faces = data.filter(region => 
+      region.data.concepts[0].name === 'Human face')
+
+    const boxes_ratio = human_faces.map((region)=>
+        region['region_info']['bounding_box'])
+
     const input_image = document.getElementById('inputimage')
     const width = Number(input_image.width);
     const height = Number(input_image.height);
@@ -145,6 +149,7 @@ class App extends Component {
           .then(count => this.setState(Object.assign(this.state.user, {entries: count})))
           .catch(console.log)
         }
+        console.log(response)
         return response['outputs'][0]['data']['regions']})
       .then(data => this.calculateBoxes(data))
       .catch(err => console.log(err))
